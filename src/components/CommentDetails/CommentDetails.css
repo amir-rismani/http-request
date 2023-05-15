@@ -1,0 +1,6 @@
+.comment-details{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    padding: 2rem 1rem;
+}

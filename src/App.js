@@ -1,10 +1,10 @@
 import './App.css';
+import CommentContainer from './container/CommentContainer/CommentContainer';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <CommentContainer />
     </div>
   );
 }

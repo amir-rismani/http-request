@@ -1,0 +1,33 @@
+.comment{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 5px;
+    background:aliceblue;
+    gap: 1rem;
+    min-height: 111px;
+    cursor: pointer;
+}
+
+.record-field{
+    display: flex;
+    column-gap: .5rem;
+    justify-content: start;
+}
+
+.label{
+    font-weight: 700;
+}
+
+/* @media screen and (max-width: 767px) {
+    .comment {
+        flex-basis: 100%;
+    }
+} */
+
+@media screen and (max-width: 998px) {
+    .comment {
+        flex-basis: 100%;
+    }
+}
