@@ -48,7 +48,18 @@ button{
     position: relative;
     display: flex;
     justify-content: center;
+    cursor: pointer;
 }
+
+button.inline{
+    width: auto;
+    padding: 2px 10px;
+}
+
+button.delete{
+    background: red;
+}
+
 .loading{
     display: flex;
     justify-content: center;

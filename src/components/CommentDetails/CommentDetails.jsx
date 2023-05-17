@@ -15,6 +15,16 @@ const CommentDetails = ({ commentId }) => {
         }
     }, [commentId]);
 
+    const deleteHandler = () => {
+        axios.delete(`http://jsonplaceholder.typicode.com/comments/${commentId}`)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     let commentDetails = <p>Please select a comment for show details.</p>;
     if (commentId) commentDetails = <p>Loading details...</p>
     if (comment) commentDetails = <>
@@ -30,6 +40,9 @@ const CommentDetails = ({ commentId }) => {
         <div className="record-field">
             <span className="label">Body:</span>
             <span>{comment.body}</span>
+        </div>
+        <div className="actions">
+            <button className="inline delete" onClick={deleteHandler}>Delete</button>
         </div>
     </>
     return commentDetails;
