@@ -8,11 +8,11 @@ import "./CommentContainer.css";
 const CommentContainer = () => {
     const [comments, setComments] = useState(null);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         getAllComments()
     }, []);
-
 
     const clickHandler = async (commentId) => {
         setSelectedCommentId(commentId);
@@ -28,7 +28,6 @@ const CommentContainer = () => {
             })
     }
 
-
     const addHandler = async (commentValues) => {
         await axios.post('http://localhost:3001/comments', commentValues);
         getAllComments()
@@ -41,12 +40,14 @@ const CommentContainer = () => {
             })
             .catch((error) => {
                 console.log(error)
+                setError(true)
+                // setError({message: error.message})
             });
     }
 
     return (
         <main>
-            <CommentList comments={comments} onClickComment={clickHandler} />
+            <CommentList comments={comments} onClickComment={clickHandler} error={error} />
             <CommentDetails commentId={selectedCommentId} deleteHandler={deleteHandler} />
             <CommentForm addHandler={addHandler} />
         </main>
