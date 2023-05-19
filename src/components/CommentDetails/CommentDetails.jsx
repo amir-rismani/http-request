@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./CommentDetails.css";
 import axios from "axios";
-const CommentDetails = ({ commentId }) => {
+const CommentDetails = ({ commentId, deleteHandler }) => {
     const [comment, setComment] = useState(null);
 
     useEffect(() => {
         if (commentId) {
             async function getComment() {
-                const { data } = await axios.get(`http://jsonplaceholder.typicode.com/comments/${commentId}`);
+                const { data } = await axios.get(`http://localhost:3001/comments/${commentId}`);
                 setComment(data)
             }
 
@@ -15,18 +15,13 @@ const CommentDetails = ({ commentId }) => {
         }
     }, [commentId]);
 
-    const deleteHandler = () => {
-        axios.delete(`http://jsonplaceholder.typicode.com/comments/${commentId}`)
-            .then((response) => {
-                console.log(response)
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+    const deleteCommentHandler = (commentId) => {
+        deleteHandler(commentId);
+        setComment(null);
     }
 
     let commentDetails = <p>Please select a comment for show details.</p>;
-    if (commentId) commentDetails = <p>Loading details...</p>
+    if (comment && commentId) commentDetails = <p>Loading details...</p>
     if (comment) commentDetails = <>
         <h1>Comment Details</h1>
         <div className="record-field">
@@ -42,10 +37,10 @@ const CommentDetails = ({ commentId }) => {
             <span>{comment.body}</span>
         </div>
         <div className="actions">
-            <button className="inline delete" onClick={deleteHandler}>Delete</button>
+            <button className="inline delete" onClick={() => deleteCommentHandler(commentId)}>Delete</button>
         </div>
     </>
-    return commentDetails;
+    return <div className="comment-details">{commentDetails}</div>;
 }
 
 export default CommentDetails;

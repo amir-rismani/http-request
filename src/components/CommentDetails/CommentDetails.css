@@ -1,6 +1,18 @@
 .comment-details{
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background:aliceblue;
+    border-radius: 5px;
     padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.comment-details > p{
+    text-align: center;
+}
+
+.actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,9 +1,10 @@
 .comment-list{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 @media screen and (max-width: 998px) {

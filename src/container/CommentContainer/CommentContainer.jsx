@@ -8,26 +8,47 @@ import "./CommentContainer.css";
 const CommentContainer = () => {
     const [comments, setComments] = useState(null);
     const [selectedCommentId, setSelectedCommentId] = useState(null);
+
     useEffect(() => {
-        // then/catch
-        axios.get('http://jsonplaceholder.typicode.com/comments')
-            .then((response) => {
-                setComments(response.data.slice(0, 4))
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+        getAllComments()
     }, []);
+
 
     const clickHandler = async (commentId) => {
         setSelectedCommentId(commentId);
     }
 
+    const deleteHandler = async (commentId) => {
+        axios.delete(`http://localhost:3001/comments/${commentId}`)
+            .then((response) => {
+                getAllComments()
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+
+    const addHandler = async (commentValues) => {
+        await axios.post('http://localhost:3001/comments', commentValues);
+        getAllComments()
+    }
+
+    const getAllComments = () => {
+        axios.get('http://localhost:3001/comments')
+            .then((response) => {
+                setComments(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     return (
         <main>
             <CommentList comments={comments} onClickComment={clickHandler} />
-            <CommentDetails commentId={selectedCommentId} />
-            <CommentForm />
+            <CommentDetails commentId={selectedCommentId} deleteHandler={deleteHandler} />
+            <CommentForm addHandler={addHandler} />
         </main>
     );
 }

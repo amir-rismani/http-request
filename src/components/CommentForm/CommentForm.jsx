@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CommentForm.css"
 import axios from "axios";
 import { AiOutlineLoading } from "react-icons/ai";
-const CommentForm = () => {
+const CommentForm = ({ addHandler }) => {
     const [commentValues, setCommentValues] = useState({
         name: "",
         email: "",
@@ -21,7 +21,7 @@ const CommentForm = () => {
         event.preventDefault();
         try {
             setSubmitting(true);
-            await axios.post('http://jsonplaceholder.typicode.com/comments', commentValues);
+            await addHandler(commentValues);
             setSubmitting(false);
 
             setCommentValues({
