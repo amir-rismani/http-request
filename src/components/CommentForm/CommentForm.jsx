@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./CommentForm.css"
-import axios from "axios";
 import { AiOutlineLoading } from "react-icons/ai";
 const CommentForm = ({ addHandler }) => {
     const [commentValues, setCommentValues] = useState({

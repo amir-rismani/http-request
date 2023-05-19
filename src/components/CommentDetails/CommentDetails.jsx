@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./CommentDetails.css";
-import axios from "axios";
+import http from "../../services/httpService";
 const CommentDetails = ({ commentId, deleteHandler }) => {
     const [comment, setComment] = useState(null);
 
     useEffect(() => {
         if (commentId) {
             async function getComment() {
-                const { data } = await axios.get(`http://localhost:3001/comments/${commentId}`);
+                const { data } = await http.get(`/comments/${commentId}`);
                 setComment(data)
             }
 
@@ -21,7 +21,7 @@ const CommentDetails = ({ commentId, deleteHandler }) => {
     }
 
     let commentDetails = <p>Please select a comment for show details.</p>;
-    if (comment && commentId) commentDetails = <p>Loading details...</p>
+    if (commentId) commentDetails = <p>Loading details...</p>
     if (comment) commentDetails = <>
         <h1>Comment Details</h1>
         <div className="record-field">

@@ -50,22 +50,10 @@
       "body": "voluptate iusto quis nobis reprehenderit ipsum amet nulla\nquia quas dolores velit et non\naut quia necessitatibus\nnostrum quaerat nulla et accusamus nisi facilis"
     },
     {
-      "name": "Ahmad",
-      "email": "Mahtabi",
-      "body": "it comment enter for test...",
+      "name": "Test add",
+      "email": "test@ex.co",
+      "body": "this is a test for add a new comment.",
       "id": 11
-    },
-    {
-      "name": "test",
-      "email": "test",
-      "body": "test",
-      "id": 12
-    },
-    {
-      "name": "test2",
-      "email": "test2",
-      "body": "test2",
-      "id": 13
     }
   ]
 }

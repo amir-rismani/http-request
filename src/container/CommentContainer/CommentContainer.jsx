@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CommentDetails from "../../components/CommentDetails/CommentDetails";
 import CommentForm from "../../components/CommentForm/CommentForm";
 import CommentList from "../../components/CommentList/CommentList";
-import axios from "axios";
+import http from "../../services/httpService";
 import "./CommentContainer.css";
 
 const CommentContainer = () => {
@@ -19,9 +19,10 @@ const CommentContainer = () => {
     }
 
     const deleteHandler = async (commentId) => {
-        axios.delete(`http://localhost:3001/comments/${commentId}`)
+        http.delete(`/comments/${commentId}`)
             .then((response) => {
-                getAllComments()
+                getAllComments();
+                setSelectedCommentId(null);
             })
             .catch((error) => {
                 console.log(error)
@@ -29,12 +30,12 @@ const CommentContainer = () => {
     }
 
     const addHandler = async (commentValues) => {
-        await axios.post('http://localhost:3001/comments', commentValues);
+        await http.post('/comments', commentValues);
         getAllComments()
     }
 
     const getAllComments = () => {
-        axios.get('http://localhost:3001/comments')
+        http.get('/comments')
             .then((response) => {
                 setComments(response.data)
             })
