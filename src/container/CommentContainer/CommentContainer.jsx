@@ -4,6 +4,7 @@ import CommentForm from "../../components/CommentForm/CommentForm";
 import CommentList from "../../components/CommentList/CommentList";
 import http from "../../services/httpService";
 import "./CommentContainer.css";
+import { toast } from "react-toastify";
 
 const CommentContainer = () => {
     const [comments, setComments] = useState(null);
@@ -23,14 +24,16 @@ const CommentContainer = () => {
             .then((response) => {
                 getAllComments();
                 setSelectedCommentId(null);
+                toast.success('Delete comment successfully.')
             })
             .catch((error) => {
-                console.log(error)
+                toast.error('Delete comment failed.')
             })
     }
 
     const addHandler = async (commentValues) => {
         await http.post('/comments', commentValues);
+        toast.success('Add comment successfully.')
         getAllComments()
     }
 
@@ -42,6 +45,7 @@ const CommentContainer = () => {
             .catch((error) => {
                 console.log(error)
                 setError(true)
+                toast.error('Get comments failed.')
                 // setError({message: error.message})
             });
     }
