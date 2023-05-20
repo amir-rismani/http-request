@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import CommentDetails from "../../components/CommentDetails/CommentDetails";
 import CommentForm from "../../components/CommentForm/CommentForm";
 import CommentList from "../../components/CommentList/CommentList";
-import http from "../../services/httpService";
+import getAllComments from "../../services/getAllCommentsService";
+import addComment from "../../services/addCommentService";
+import deleteComment from "../../services/deleteCommentService";
 import "./CommentContainer.css";
 import { toast } from "react-toastify";
 
@@ -12,7 +14,7 @@ const CommentContainer = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        getAllComments()
+        getComments()
     }, []);
 
     const clickHandler = async (commentId) => {
@@ -20,34 +22,44 @@ const CommentContainer = () => {
     }
 
     const deleteHandler = async (commentId) => {
-        http.delete(`/comments/${commentId}`)
-            .then((response) => {
-                getAllComments();
-                setSelectedCommentId(null);
-                toast.success('Delete comment successfully.')
-            })
-            .catch((error) => {
-                toast.error('Delete comment failed.')
-            })
+        try {
+            await deleteComment(commentId)
+            getComments();
+            setSelectedCommentId(null);
+            toast.success('Delete comment successfully.')
+
+        } catch (error) {
+            toast.error(error.message)
+            setSelectedCommentId(commentId);
+
+        }
+
+        // http.delete(`/comments/${commentId}`)
+        //     .then((response) => {
+        //         getComments();
+        //         setSelectedCommentId(null);
+        //         toast.success('Delete comment successfully.')
+        //     })
+        //     .catch((error) => {
+        //         toast.error('Delete comment failed.')
+        //     })
     }
 
     const addHandler = async (commentValues) => {
-        await http.post('/comments', commentValues);
+        await addComment(commentValues);
         toast.success('Add comment successfully.')
-        getAllComments()
+        getComments()
     }
 
-    const getAllComments = () => {
-        http.get('/comments')
-            .then((response) => {
-                setComments(response.data)
-            })
-            .catch((error) => {
-                console.log(error)
-                setError(true)
-                toast.error('Get comments failed.')
-                // setError({message: error.message})
-            });
+    const getComments = async () => {
+        try {
+            const { data } = await getAllComments();
+            setComments(data)
+        } catch (error) {
+            setError(true);
+            toast.error('Get comments failed.');
+            // setError({message: error.message})
+        }
     }
 
     return (

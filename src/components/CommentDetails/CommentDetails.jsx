@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import "./CommentDetails.css";
-import http from "../../services/httpService";
+import getComment from "../../services/getCommentService";
 const CommentDetails = ({ commentId, deleteHandler }) => {
     const [comment, setComment] = useState(null);
 
     useEffect(() => {
         if (commentId) {
-            async function getComment() {
-                const { data } = await http.get(`/comments/${commentId}`);
-                setComment(data)
-            }
 
-            getComment();
+            getComment(commentId)
+                .then((response) => setComment(response.data))
+                .catch(error => console.log(error))
+            // async function getComment() {
+            //     const { data } = await http.get(`/comments/${commentId}`);
+            //     setComment(data)
+            // }
+
+            // getComment();
         }
     }, [commentId]);
 
