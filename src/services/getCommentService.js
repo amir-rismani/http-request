@@ -1,5 +1,5 @@
-import http from "./httpService";
-
+// import http from "./httpService";
+import axiosInstance from "./axiosInstance";
 export default function getComment(commentId) {
-    return http.get(`/comments/${commentId}`);
+    return axiosInstance.get(`/comments/${commentId}`);
 }
