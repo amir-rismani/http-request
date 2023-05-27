@@ -1,27 +1,38 @@
 import { useEffect, useState } from "react";
 import "./CommentDetails.css";
 import getComment from "../../services/getCommentService";
-const CommentDetails = ({ commentId, deleteHandler }) => {
+import getAllComments from "../../services/getAllCommentsService";
+import deleteComment from "../../services/deleteCommentService";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const CommentDetails = () => {
     const [comment, setComment] = useState(null);
 
+    const params = useParams();
+    const navigate = useNavigate();
+    const commentId = params.id;
     useEffect(() => {
         if (commentId) {
-
             getComment(commentId)
                 .then((response) => setComment(response.data))
                 .catch(error => console.log(error))
-            // async function getComment() {
-            //     const { data } = await http.get(`/comments/${commentId}`);
-            //     setComment(data)
-            // }
-
-            // getComment();
         }
     }, [commentId]);
 
-    const deleteCommentHandler = (commentId) => {
-        deleteHandler(commentId);
-        setComment(null);
+    const deleteCommentHandler = async (commentId) => {
+        try {
+            await deleteComment(commentId)
+            try {
+                await getAllComments();
+            } catch (error) {
+                toast.error('Get comments failed.');
+            }
+            toast.success('Delete comment successfully.')
+            navigate('/');
+        } catch (error) {
+            toast.error(error.message)
+        } setComment(null);
     }
 
     let commentDetails = <p>Please select a comment for show details.</p>;

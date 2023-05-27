@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "./CommentForm.css"
+import addComment from "../../services/addCommentService";
+import getAllComments from "../../services/getAllCommentsService";
 import { AiOutlineLoading } from "react-icons/ai";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 const CommentForm = ({ addHandler }) => {
+    const navigate = useNavigate();
     const [commentValues, setCommentValues] = useState({
         name: "",
         email: "",
@@ -20,7 +26,15 @@ const CommentForm = ({ addHandler }) => {
         event.preventDefault();
         try {
             setSubmitting(true);
-            await addHandler(commentValues);
+            await addComment(commentValues);
+            toast.success('Add comment successfully.')
+            try {
+                await getAllComments();
+                toast.success('Add comments successfull.');
+                navigate("/")
+            } catch (error) {
+                toast.error('Get comments failed.');
+            }
             setSubmitting(false);
 
             setCommentValues({

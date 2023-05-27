@@ -1,25 +1,19 @@
-import { useRef } from "react";
 import "./Comment.css"
-const Comment = ({ comment, onClickComment }) => {
-    const selectedComment = useRef();
-    const clickHandler = (commentId) => {
-        onClickComment(commentId);
-        selectedComment.current.parentElement.childNodes.forEach(childNode => {
-            childNode.classList.remove('selected')
-        })
-        selectedComment.current.classList.add('selected')
-    }
+import { Link } from "react-router-dom";
+const Comment = ({ comment }) => {
     return (
-        <div ref={selectedComment} className="comment" onClick={() => clickHandler(comment.id)}>
-            <div className="record-field">
-                <span className="label">Name:</span>
-                <span>{comment.name}</span>
+        <Link to={`/show-comment/${comment.id}`}>
+            <div className="comment">
+                <div className="record-field">
+                    <span className="label">Name:</span>
+                    <span>{comment.name}</span>
+                </div>
+                <div className="record-field">
+                    <span className="label">Email:</span>
+                    <span>{comment.email}</span>
+                </div>
             </div>
-            <div className="record-field">
-                <span className="label">Email:</span>
-                <span>{comment.email}</span>
-            </div>
-        </div>
+        </Link>
     );
 }
 

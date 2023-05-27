@@ -1,14 +1,16 @@
 import './App.css';
-import CommentContainer from './container/CommentContainer/CommentContainer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Layout from './layout/Layout';
+import WebRoutes from './routes';
 function App() {
   return (
-    <div className="App">
-      <CommentContainer />
-      <ToastContainer />
-    </div>
+    <Layout>
+      <div className='App'>
+        <WebRoutes />
+        <ToastContainer />
+      </div>
+    </Layout>
   );
 }
 

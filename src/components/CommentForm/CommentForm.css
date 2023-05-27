@@ -3,16 +3,16 @@
     padding: 2rem;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 form{
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 1rem;
-    width: 30%;
+    /* width: 30%; */
 }
 
 .form-group{

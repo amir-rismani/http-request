@@ -10,46 +10,22 @@ import { toast } from "react-toastify";
 
 const CommentContainer = () => {
     const [comments, setComments] = useState(null);
-    const [selectedCommentId, setSelectedCommentId] = useState(null);
+    // const [selectedCommentId, setSelectedCommentId] = useState(null);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         getComments()
     }, []);
 
-    const clickHandler = async (commentId) => {
-        setSelectedCommentId(commentId);
-    }
+    // const clickHandler = async (commentId) => {
+    //     setSelectedCommentId(commentId);
+    // }
 
-    const deleteHandler = async (commentId) => {
-        try {
-            await deleteComment(commentId)
-            getComments();
-            setSelectedCommentId(null);
-            toast.success('Delete comment successfully.')
-
-        } catch (error) {
-            toast.error(error.message)
-            setSelectedCommentId(commentId);
-
-        }
-
-        // http.delete(`/comments/${commentId}`)
-        //     .then((response) => {
-        //         getComments();
-        //         setSelectedCommentId(null);
-        //         toast.success('Delete comment successfully.')
-        //     })
-        //     .catch((error) => {
-        //         toast.error('Delete comment failed.')
-        //     })
-    }
-
-    const addHandler = async (commentValues) => {
-        await addComment(commentValues);
-        toast.success('Add comment successfully.')
-        getComments()
-    }
+    // const addHandler = async (commentValues) => {
+    //     await addComment(commentValues);
+    //     toast.success('Add comment successfully.')
+    //     getComments()
+    // }
 
     const getComments = async () => {
         try {
@@ -64,9 +40,9 @@ const CommentContainer = () => {
 
     return (
         <main>
-            <CommentList comments={comments} onClickComment={clickHandler} error={error} />
-            <CommentDetails commentId={selectedCommentId} deleteHandler={deleteHandler} />
-            <CommentForm addHandler={addHandler} />
+            <CommentList comments={comments} error={error} />
+            {/* <CommentDetails commentId={selectedCommentId} deleteHandler={deleteHandler} />
+            <CommentForm addHandler={addHandler} /> */}
         </main>
     );
 }
