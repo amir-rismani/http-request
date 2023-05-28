@@ -7,10 +7,7 @@ const CommentList = ({ comments, error }) => {
         if (!error && comments) renderValue = comments.map(comment => <Comment comment={comment} key={comment.id} />)
         return renderValue
     }
-
-    return (
-        <section className="comment-list">{renderCommentList()}</section>
-    );
+    return <section className="comment-list">{renderCommentList()}</section>;
 }
 
 export default CommentList;

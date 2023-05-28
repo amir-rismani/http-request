@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CommentDetails.css";
 import getComment from "../../services/getCommentService";
-import getAllComments from "../../services/getAllCommentsService";
 import deleteComment from "../../services/deleteCommentService";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -23,11 +22,6 @@ const CommentDetails = () => {
     const deleteCommentHandler = async (commentId) => {
         try {
             await deleteComment(commentId)
-            try {
-                await getAllComments();
-            } catch (error) {
-                toast.error('Get comments failed.');
-            }
             toast.success('Delete comment successfully.')
             navigate('/');
         } catch (error) {
