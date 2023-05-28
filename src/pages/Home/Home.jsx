@@ -1,7 +1,7 @@
-import CommentContainer from "../../container/CommentContainer/CommentContainer";
+import Comments from "../../components/Comments/Comments";
 
 const Home = () => {
-    return (<CommentContainer />);
+    return (<Comments />);
 }
 
 export default Home;

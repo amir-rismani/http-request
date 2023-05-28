@@ -1,4 +1,4 @@
-import Comment from "../Comment/Comment";
+import Comment from "./Comment/Comment";
 import "./CommentList.css"
 const CommentList = ({ comments, error }) => {
     const renderCommentList = () => {

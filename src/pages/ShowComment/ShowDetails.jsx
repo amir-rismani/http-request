@@ -1,7 +1,7 @@
 import CommentDetails from "../../components/CommentDetails/CommentDetails";
 
 const ShowComment = () => {
-    return (<CommentDetails />);
+    return <CommentDetails />;
 }
 
 export default ShowComment;
